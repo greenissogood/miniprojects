@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/card_flip.css">
+
+    <style>
+
+        @font-face {
+            font-family: 'OAGothic-ExtraBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+         html, body {
+            height: 100%;
+            text-shadow: 3px 4px 5px gray;   
+        }
+        body{
+            
+            /* position: relative; */
+            /* background-image: url(./img/mova_main.jpg); */
+            background-color: #24283b;       
+        }
+
+        #wrap {
+            border: 1px solid black;
+            height: 1000px;
+            position: relative;
+            
+        }
+        #container {
+            height: 80%;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .content {
+            width: 100%;
+            
+        }
+        .card{
+             top: 12%;
+            left: 25%; 
+            width: 50%;
+            
+            
+        }
+
+        .back{
+            font-size: 30px; 
+             
+        }
+        
+        .selectBtn{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(42, 29, 90);
+            color: white;
+            border: 2px solid black;
+            font-size: 30px;
+        }
+        #foot {
+            display: flex;
+            height: 10%;
+            width: 100%;
+            justify-content: space-around;
+            margin-top: 4%;
+        }
+
+                /* 헤더 시작 */
+        .header{
+            display: flex;
+            background-color: rgba(36, 40, 59, 0.5);
+            position: fixed;
+            z-index: 950;
+            width: 100%;
+        }
+        .logo{
+            margin : 0 5% 0 5%; 
+        }
+        .logo img{
+            width: 200px;
+        }
+
+        .video_modal_popup.reveal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            z-index:998;
+        }
+
+        .video_modal_popup .video-wrapper {
+            position: relative;
+            width: 80%;
+            padding-bottom: 45%;
+            z-index: 999;
+        }
+
+        .video_modal_popup .video-wrapper iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video_modal_popup.reveal .video_modal_popup-closer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            z-index: 998;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <script src="./js/jquery-3.7.0.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/bootstrap.esm.js"></script> 
+    
+    <div id="wrap">
+    <div class="video_modal_popup">
+        <div class="video_modal_popup-closer"></div>
+    </div>
+
+        <header class="header">
+            <div class="logo"">
+                <a href="./movaMain.html"><img src="./img/logo/mova_logo_grad.png" alt="로드실패"></a>
+            </div>
+        </header>
+
+        <div id="container">
+                <div class="content">
+                    <a class="card" >
+                        <div class="front" style="background-image: url(./img/범죄도시.jpg);">
+                            <p>_</p>
+                        </div>
+                        <div class="back">
+                            <div>
+                            <p>영화 평점 ⭐7.76</p>
+                            <p>한줄평</p>
+                            <p>"시원하게 싹 쓸어버린다!"</p>
+                            <button class="button"  data-video="UTPEPu2Je9g">예고편 보기</button> 
+                            </div>
+                        </div>
+                    </a>
+                </div>
+           
+                <div class="content">
+                    <a class="card" href="#!" >
+                        <div class="front" style="background-image: url(./img/슈가.jpg);">
+                            <p>_</p>
+                        </div>
+                        <div class="back">
+                            <div>
+                            <p>영화 평점 ⭐9.87</p>
+                            <p>한줄평</p>
+                            <p>“지금 현재 내가 하고 싶은 이야기를 찾고 싶었다”</p>
+                            <button class="button"  data-video="7AO8JsA9jlE">예고편 보기</button> 
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        </div>
+
+
+        <div id="foot">
+            <a class="selectBtn" href="./endPage.html"><button type="button" class="selectBtn btn btn-outline-primary">선택</button></a>
+            <a class="selectBtn" href="./endPage.htmll"><button type="button" class="selectBtn btn btn-outline-primary">선택</button></a>
+        </div>
+    </div>
+
+    <script>
+                // 비디오 창 띄우기
+        $(".button").click(function() {
+        $(".video_modal_popup").addClass("reveal"),
+        $(".video_modal_popup .video-wrapper").remove(),
+        $(".video_modal_popup").append("<div class='video-wrapper'><iframe width='560' height='315' src='https://youtube.com/embed/" + $(this).data("video") + "?rel=0&playsinline=1&autoplay=1' allow='autoplay; encrypted-media' allowfullscreen></iframe></div>")
+        }),
+        $(".video_modal_popup-closer").click(function() {
+            $(".video_modal_popup .video-wrapper").remove(),
+            $(".video_modal_popup").removeClass("reveal")
+        });
+    </script>
+
+
+
+
+
+
+
+    <script>
+
+
+        let images1 = document.querySelector(".img0");
+        images1.setAttribute('src', `/PROJECT/img/1.jpg`);
+        console.log(images1) 
+        // 엘리
+
+        let images2 = document.querySelector(".img1");
+        images2.setAttribute('src', `/PROJECT/img/2.jpg`);
+        console.log(images2)
+        // 범죄
+
+        let images3 = document.querySelector(".img2");
+        images3.setAttribute('src', `/PROJECT/img/3.jpg`);
+        console.log(images3)
+        // 귀공자
+
+        
+
+        let images15 = document.querySelector(".img14");
+        images15.setAttribute('src', `/PROJECT/img/15.jpg`);
+        console.log(images15)
+
+        let images16 = document.querySelector(".img15");
+        images16.setAttribute('src', `/PROJECT/img/16.jpg`);
+        console.log(images16)
+
+        let image_arr = ['엘리멘탈','범죄도시3','귀공자','스파이더맨','플래시','명탐정코난','트랜스포머',
+    '악마들','슈가','수라','나비효과','가오갤3','인드림','북오브러브','남은인생10년','인어공주']
+
+
+
+
+        let movieUrl = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20230626"
+        let movieList1 = [];
+
+        $.ajax({
+            url: movieUrl,
+            async: false,
+            success: (result) => {
+                console.log(result)
+
+                let movieList = result.boxOfficeResult.dailyBoxOfficeList;
+                // 박스오피스순위, 영화이름, 개봉일을 콘솔창에 출력해보기! index 7,5,6
+
+                for (let i = 0; i < movieList.length; i++) {
+                    let movieObject = { '영화이름': movieList[i].movieNm, '누적관객수': movieList[i].audiAcc }
+                    movieList1.push(movieObject)
+                }
+            }
+        })
+
+        movieList1[0]["영화평점"] = "⭐8.85"
+        movieList1[0]["장르"] = "애니메이션"
+        movieList1[0]["출연배우"] = "레아 루이스, 마무두 아티"
+        movieList1[0]["이미지"] = images1
+
+        movieList1[1]["영화평점"] = "⭐7.76"
+        movieList1[1]["장르"] = "범죄"
+        movieList1[1]["출연배우"] = "마동석, 이준혁, 이범수"
+        movieList1[1]["이미지"] = images2
+
+        movieList1[2]["영화평점"] = "⭐8.10"
+        movieList1[2]["장르"] = "액션"
+        movieList1[2]["출연배우"] = "김선호, 김강우"
+        movieList1[2]["이미지"] = images3
+
+        movieList1[3]["영화평점"] = "⭐8.83"
+        movieList1[3]["장르"] = "애니메이션"
+        movieList1[3]["출연배우"] = "샤메익 무어, 헤일리 스테인펠드"
+        movieList1[3]["이미지"] = images4
+
+        movieList1[4]["영화평점"] = "⭐8.21"
+        movieList1[4]["장르"] = "액션"
+        movieList1[4]["출연배우"] = "애즈라 밀러, 마이클 키튼, 샤샤 카예"
+        movieList1[4]["이미지"] = images5
+
+        movieList1[5]["영화평점"] = "⭐8.37"
+        movieList1[5]["장르"] = "애니메이션"
+        movieList1[5]["출연배우"] = "코난, 장미"
+        movieList1[5]["이미지"] = images6
+
+        movieList1[6]["영화평점"] = "⭐7.18"
+        movieList1[6]["장르"] = "액션"
+        movieList1[6]["출연배우"] = "안소니 라모스, 도미닉 피시백, 피터 딘클리지"
+        movieList1[6]["이미지"] = images7
+
+        movieList1[7]["영화평점"] = "⭐7.56"
+        movieList1[7]["장르"] = "스릴러"
+        movieList1[7]["출연배우"] = "장동윤, 오대환, 최귀화"
+        movieList1[7]["이미지"] = images8
+
+        movieList1[8]["영화평점"] = "⭐9.87"
+        movieList1[8]["장르"] = "다큐멘터리"
+        movieList1[8]["출연배우"] = "슈가"
+        movieList1[8]["이미지"] = images9
+
+        movieList1[9]["영화평점"] = "⭐9.90"
+        movieList1[9]["장르"] = "다큐멘터리"
+        movieList1[9]["출연배우"] = "오동필, 황윤"
+        movieList1[9]["이미지"] = images10
+
+        movieList1.push({
+            영화이름: '나비효과',
+            누적관객수: '618',
+            영화평점: "⭐8.43",
+            장르: '코미디',
+            출연배우: '홍수아, 성모',
+            이미지 : images11
+
+        })
+        movieList1.push({
+            영화이름: '가디언즈 오브 갤럭시: Volume 3',
+            누적관객수: '4200000',
+            영화평점: "⭐9.39",
+            장르: '액션',
+            출연배우: '크리스 프랫, 조 샐다나, 데이브 바티스타',
+            이미지 : images12
+
+        })
+        movieList1.push({
+            영화이름: '인드림',
+            누적관객수: '1938',
+            영화평점: "⭐6.69",
+            장르: '액션/스릴러',
+            출연배우: '서효림, 오지호',
+            이미지 : images13
+
+        })
+        movieList1.push({
+            영화이름: '북 오브 러브',
+            누적관객수: '1248',
+            영화평점: "⭐8.31",
+            장르: '멜로/로맨스',
+            출연배우: '샘 클라플린, 베로니카 에체귀',
+            이미지 : images14
+
+        })
+
+        movieList1.push({
+            영화이름: '남은 인생 10년',
+            누적관객수: '130000',
+            영화평점: "⭐7.84",
+            장르: '드라마',
+            출연배우: '고마츠 나나, 사카구치 켄타로',
+            이미지 : images15
+
+        })
+
+        movieList1.push({
+            영화이름: '인어공주',
+            누적관객수: '640000',
+            영화평점: "⭐6.44",
+            장르: '뮤지컬',
+            출연배우: '할리 베일리, 멜리사 맥카시',
+            이미지 : images16
+
+        })
+        console.log(movieList1)
+
+
+
+        let btn1 = document.querySelector('#btn1')
+        let btn2 = document.querySelector('#btn2')
+
+        let image_arr2 = [];
+
+        console.log(image_arr)
+
+        let leftimg = document.querySelector('#frontPoster')
+        let rightimg = document.querySelector('#frontPoster2')
+        let video = document.querySelector('#video')
+        let video2 = document.querySelector('#video2')
+
+
+        let cnt = 0;
+        let btncnt = 0;
+        let btncnt2 =0;
+
+        if (cnt == 0) {
+            ranNum = 1;
+            ranNum2 = 2;
+
+            leftimg.appendChild(movieList1[1].이미지)
+
+            $(`.img${1}`).css('display', 'inline')
+
+            rightimg.appendChild(movieList1[2].이미지)
+
+            $(`.img${2}`).css('display', 'inline')
+
+            console.log('랜덤숫자1 ', ranNum)
+            console.log('랜덤숫자2 ', ranNum2)
+
+        }
+
+        $("#frontPoster").on('mouseover', () => {
+            $(`.img${1}`).remove(); // 사진 삭제
+            let list = `영화 이름 : ${movieList1[1].영화이름}<br> 누적관객수 : ${movieList1[ranNum].누적관객수} <br> 평점 : ${movieList1[ranNum].영화평점}
+                    <br>장르 : ${movieList1[1].장르}<br>출연배우 : ${movieList1[1].출연배우}<br>
+                    <button id = "videoBtn">예고편 보기</button>`
+                    $("#backPoster").append(list)
+            for (let i = 1; i < image_arr.length; i++) {
+                $("#videoBtn").on('click', () => {
+                    $("#backPoster").remove(); //버튼 클릭시 백포스터 내용 삭제
+                    console.log('gd')
+                    if (ranNum == 0) {
+                        $('#cute').css('display', 'inline') //숨어있던 영상 나타남
+                        let cute = document.querySelector('#cute')
+                        video.append(cute)
+                    }
+                    else if (ranNum == 1) {
+                        $('#Mrma').css('display', 'inline') //숨어있던 영상 나타남
+                        let Mrma = document.querySelector('#Mrma')
+                        video.append(Mrma)
+                    }
+                    else if (ranNum == 2) {
+                        $('#ear').css('display', 'inline') //숨어있던 영상 나타남
+                        let ear = document.querySelector('#ear')
+                        video.append(ear)
+                    }
+                    else if (ranNum == 3) {
+                        $('#spider').css('display', 'inline') //숨어있던 영상 나타남
+                        let spider = document.querySelector('#spider')
+                        video.append(spider)
+                    }
+                    else if (ranNum == 4) {
+                        $('#light').css('display', 'inline') //숨어있던 영상 나타남
+                        let light = document.querySelector('#light')
+                        video.append(light)
+                    }
+                    else if (ranNum == 5) {
+                        $('#ani').css('display', 'inline') //숨어있던 영상 나타남
+                        let ani = document.querySelector('#ani')
+                        video.append(ani)
+                    }
+                    else if (ranNum == 6) {
+                        $('#robot').css('display', 'inline') //숨어있던 영상 나타남
+                        let robot = document.querySelector('#robot')
+                        video.append(robot)
+                    }
+                    else if (ranNum == 7) {
+                        $('#devil').css('display', 'inline') //숨어있던 영상 나타남
+                        let deivl = document.querySelector('#devil')
+                        video.append(devil)
+                    }
+                    else if (ranNum == 8) {
+                        $('#sugar').css('display', 'inline') //숨어있던 영상 나타남
+                        let sugar = document.querySelector('#sugar')
+                        video.append(sugar)
+                    }
+                    else if (ranNum == 9) {
+                        $('#sura').css('display', 'inline') //숨어있던 영상 나타남
+                        let sura = document.querySelector('#sura')
+                        video.append(sura)
+                    }
+                    else if (ranNum == 10) {
+                        $('#fly').css('display', 'inline') //숨어있던 영상 나타남
+                        let fly = document.querySelector('#fly')
+                        video.append(fly)
+                    }
+                    else if (ranNum == 11) {
+                        $('#galaxy').css('display', 'inline') //숨어있던 영상 나타남
+                        let galaxy = document.querySelector('#galaxy')
+                        video.append(galaxy)
+                    }
+                    else if (ranNum == 12) {
+                        $('#dream').css('display', 'inline') //숨어있던 영상 나타남
+                        let dream = document.querySelector('#dream')
+                        video.append(dream)
+                    }
+                    else if (ranNum == 13) {
+                        $('#book').css('display', 'inline') //숨어있던 영상 나타남
+                        let book = document.querySelector('#book')
+                        video.append(book)
+                    }
+                    else if (ranNum == 14) {
+                        $('#year').css('display', 'inline') //숨어있던 영상 나타남
+                        let year = document.querySelector('#year')
+                        video.append(year)
+                    }
+                    else if (ranNum == 15) {
+                        $('#blackfish').css('display', 'inline') //숨어있던 영상 나타남
+                        let blackfish = document.querySelector('#blackfish')
+                        video.append(blackfish)
+                    }
+                })
+            }
+        }
+        )
+
+        $("#frontPoster2").on('mouseover', () => {
+            $(`.img${ranNum2}`).remove(); // 사진 삭제
+            let list = `영화 이름 : ${movieList1[ranNum2].영화이름}<br> 누적관객수 : ${movieList1[ranNum2].누적관객수} <br> 평점 : ${movieList1[ranNum2].영화평점}
+                    <br>장르 : ${movieList1[ranNum2].장르}<br>출연배우 : ${movieList1[ranNum2].출연배우}<br>
+                    <button id = "videoBtn2">예고편 보기</button>`
+                    $("#backPoster2").append(list)
+            for (let i = 1; i < image_arr.length; i++) {
+                $("#videoBtn2").on('click', () => {
+                    $("#backPoster2").html(''); //버튼 클릭시 백포스터 내용 삭제
+                    console.log('gd2')
+                    if (ranNum2 == 0) {
+                        $('#cute').css('display', 'inline') //숨어있던 영상 나타남
+                        let cute = document.querySelector('#cute')
+                        video2.append(cute)
+                    }
+                    else if (ranNum2 == 1) {
+                        $('#Mrma').css('display', 'inline') //숨어있던 영상 나타남
+                        let Mrma = document.querySelector('#Mrma')
+                        video2.append(Mrma)
+                    }
+                    else if (ranNum2 == 2) {
+                        $('#ear').css('display', 'inline') //숨어있던 영상 나타남
+                        let ear = document.querySelector('#ear')
+                        video2.append(ear)
+                    }
+                    else if (ranNum2 == 3) {
+                        $('#spider').css('display', 'inline') //숨어있던 영상 나타남
+                        let spider = document.querySelector('#spider')
+                        video2.append(spider)
+                    }
+                    else if (ranNum2 == 4) {
+                        $('#light').css('display', 'inline') //숨어있던 영상 나타남
+                        let light = document.querySelector('#light')
+                        video2.append(light)
+                    }
+                    else if (ranNum2 == 5) {
+                        $('#ani').css('display', 'inline') //숨어있던 영상 나타남
+                        let ani = document.querySelector('#ani')
+                        video2.append(ani)
+                    }
+                    else if (ranNum2 == 6) {
+                        $('#robot').css('display', 'inline') //숨어있던 영상 나타남
+                        let robot = document.querySelector('#robot')
+                        video2.append(robot)
+                    }
+                    else if (ranNum2 == 7) {
+                        $('#devil').css('display', 'inline') //숨어있던 영상 나타남
+                        let deivl = document.querySelector('#devil')
+                        video2.append(devil)
+                    }
+                    else if (ranNum2 == 8) {
+                        $('#sugar').css('display', 'inline') //숨어있던 영상 나타남
+                        let sugar = document.querySelector('#sugar')
+                        video2.append(sugar)
+                    }
+                    else if (ranNum2 == 9) {
+                        $('#sura').css('display', 'inline') //숨어있던 영상 나타남
+                        let sura = document.querySelector('#sura')
+                        video2.append(sura)
+                    }
+                    else if (ranNum2 == 10) {
+                        $('#fly').css('display', 'inline') //숨어있던 영상 나타남
+                        let fly = document.querySelector('#fly')
+                        video2.append(fly)
+                    }
+                    else if (ranNum2 == 11) {
+                        $('#galaxy').css('display', 'inline') //숨어있던 영상 나타남
+                        let galaxy = document.querySelector('#galaxy')
+                        video2.append(galaxy)
+                    }
+                    else if (ranNum2 == 12) {
+                        $('#dream').css('display', 'inline') //숨어있던 영상 나타남
+                        let dream = document.querySelector('#dream')
+                        video2.append(dream)
+                    }
+                    else if (ranNum2 == 13) {
+                        $('#book').css('display', 'inline') //숨어있던 영상 나타남
+                        let book = document.querySelector('#book')
+                        video2.append(book)
+                    }
+                    else if (ranNum2 == 14) {
+                        $('#year').css('display', 'inline') //숨어있던 영상 나타남
+                        let year = document.querySelector('#year')
+                        video2.append(year)
+                    }
+                    else if (ranNum2 == 15) {
+                        $('#blackfish').css('display', 'inline') //숨어있던 영상 나타남
+                        let blackfish = document.querySelector('#blackfish')
+                        video2.append(blackfish)
+                    }
+                })
+            }
+        }
+        )
+        
+        $("#backPoster").on('mouseout', () => {
+            $("#backPoster").html('')
+
+             $("#frontPoster").html(movieList1[ranNum].이미지)
+            // for (let i = 1; i <= 16; i++) {
+            //     if (ranNum === i) {
+            //         $("#frontPoster").html(eval(`images${i}`))
+            //     }
+            // }
+        });
+        $("#backPoster2").on('mouseout', () => {
+            $("#backPoster2").html('')
+            $("#frontPoster2").html(movieList1[ranNum2].이미지)
+        });
+
+
+
+    </script>
+</body>
+</html>

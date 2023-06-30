@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+            /* background-color: #302b63; */
+            background-color: #24283b;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        #wrap {
+            border: 1px solid black;
+            height: 850px;
+            background-color: antiquewhite;
+        }
+
+        #header {
+            height: 75px;
+            border: 1px solid black;
+        }
+
+        #container {
+            height: 730px;
+            display: flex;
+
+        }
+
+        #foot {
+            display: flex;
+            height: 100px;
+            width: 100%;
+        }
+
+        #vs {
+            border: 1px solid black;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            width: 6%;
+        }
+
+        #content1 {
+            width: 47%;
+            height: 100%;
+
+        }
+
+        #content2 {
+            width: 47%;
+            height: 100%;
+        }
+
+
+        #video {
+            position: absolute;
+        }
+
+        #btn1 {
+            width: 50%;
+        }
+
+        #btn2 {
+            width: 50%
+        }
+
+        /* 
+        #city3 {
+            height: 730px;
+            width: 100%;
+
+        } */
+
+        #btn1 {
+            width: 50%;
+
+        }
+
+        #btn2 {
+            width: 50%;
+        }
+
+        #blackfish {
+            margin-top: 25%;
+            margin-left: 10%;
+        }
+
+        .imggg {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+
+        .navCSS {
+            background-color: rgba(36, 40, 59, 1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+
+        }
+
+        .logo-img {
+            width: 200px;
+            margin-left: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- nav시작 -->
+    <nav class="navbar navbar-expand-lg navCSS" style="height:100px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="./eventPage.html"><img class="logo-img" src="./img/logo/mova_logo_grad.png"></a>
+        </div>
+    </nav>
+    <!-- nav끝 -->
+    <div class="container" style="margin-top:120px">
+        <div class="row">
+            <div class="col-5 p-0" id="abc" style="height: 700px; box-shadow: 5px 5px 20px;"></div>
+            <div class="col-2 d-flex justify-content-center align-items-center"><span id="rkd"
+                    style="font-size:80px; color: white;">16강</span></div>
+            <div class="col-5 p-0" id="def" style="height: 700px; box-shadow: 5px 5px 20px;"></div>
+            <!-- <div class="col-3"></div> -->
+        </div>
+        <div class="row">
+            <button class="col-5 btn" id="pick1"
+                style="height:120px; font-size:50px; background-color: #d5669e; color:white; ">선택</button>
+            <div class="col-2"></div>
+            <button class="col-5 btn " id="pick2"
+                style="height:120px; font-size:50px; background-color: #737ff2; color:white;">선택</button>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <script>
+
+        let movieAllDate = [
+            {
+                name: '나비효과',
+                atndn: '618',
+                star: "⭐8.43",
+                genre: '코미디',
+                actor: '홍수아, 성모',
+                imgUrl: "./image/11.jpg",
+            },
+            {
+                name: '가디언즈 오브 갤럭시: Volume 3',
+                atndn: '4200000',
+                star: "⭐9.39",
+                genre: '액션',
+                actor: '크리스 프랫, 조 샐다나, 데이브 바티스타',
+                imgUrl: "./image/12.jpg",
+            },
+            {
+                name: '인드림',
+                atndn: '1938',
+                star: "⭐6.69",
+                genre: '액션/스릴러',
+                actor: '서효림, 오지호',
+                imgUrl: "./image/13.jpg",
+            },
+            {
+                name: '북 오브 러브',
+                atndn: '1248',
+                star: "⭐8.31",
+                genre: '멜로/로맨스',
+                actor: '샘 클라플린, 베로니카 에체귀',
+                imgUrl: "./image/14.jpg",
+            },
+            {
+                name: '남은 인생 10년',
+                atndn: '130000',
+                star: "⭐7.84",
+                genre: '드라마',
+                actor: '고마츠 나나, 사카구치 켄타로',
+                imgUrl: "./image/15.jpg",
+            },
+            {
+                name: '범죄도시3',
+                atndn: '640000',
+                star: "⭐6.44",
+                genre: '뮤지컬',
+                actor: '할리 베일리, 멜리사 맥카시',
+                imgUrl: "./image/2.jpg",
+            },
+            {
+                name: '엘리멘탈',
+                atndn: '1306834',
+                star: "⭐8.85",
+                genre: '애니메이션',
+                actor: '레아 루이스, 마무두 아티',
+                imgUrl: "./image/1.jpg",
+            },
+            {
+                name: '귀공자',
+                atndn: '381195',
+                star: "⭐8.10",
+                genre: '액션',
+                actor: '김선호, 김강우',
+                imgUrl: "./image/3.jpg",
+            },
+            {
+                name: '스파이더맨 어크로스더유니버스',
+                atndn: '380485',
+                star: "⭐8.83",
+                genre: '애니메이션',
+                actor: '샤메익 무어, 헤일리 스테인휠드',
+                imgUrl: "./image/4.jpg",
+            },
+            {
+                name: '플래시',
+                atndn: '593987',
+                star: "⭐8.21",
+                genre: '액션',
+                actor: '애즈라 밀러, 마이클키튼, 샤샤 카예',
+                imgUrl: "./image/5.jpg",
+            },
+            {
+                name: '명탐정코난 하이바라아이이야기~흑철의미스터리트레인',
+                atndn: '40749',
+                star: "⭐8.37",
+                genre: '애니메이션',
+                actor: '코난, 장미',
+                imgUrl: "./image/6.jpg",
+            },
+            {
+                name: '트랜스포머 비스트의서막',
+                atndn: '759545',
+                star: "⭐7.18",
+                genre: '액션',
+                actor: '안소니 라모스, 도미닉 피시백',
+                imgUrl: "./image/7.jpg",
+            },
+            {
+                name: '악마들',
+                atndn: '1833',
+                star: "⭐7.56",
+                genre: '스릴러',
+                actor: '장동윤, 오대환, 최귀화',
+                imgUrl: "./image/8.jpg",
+            },
+            {
+                name: '영화슈가 로드투디데이',
+                atndn: '3600',
+                star: "⭐9.87",
+                genre: '다큐멘터리',
+                actor: '슈가',
+                imgUrl: "./image/9.jpg",
+            },
+            {
+                name: '수라',
+                atndn: '20251',
+                star: "⭐9.90",
+                genre: '다큐멘터리',
+                actor: '오동필, 황윤',
+                imgUrl: "./image/10.jpg",
+            },
+            {
+                name: '인어공주',
+                atndn: '640000',
+                star: "⭐6.44",
+                genre: '뮤지컬',
+                actor: '할리 베일리, 멜리사 맥카시',
+                imgUrl: "./image/16.jpg",
+            }
+
+
+        ];
+        let movieArr = [];
+        let randomArr = [];
+        let winnerArr = [];
+        let winnerArr4 = [];
+        let winnerArrFinal = [];
+        let champion = [];
+        let num = 0;
+        let step1 = "";
+        var isFirstEntry = true;
+        var isFirstEntry2 = false;
+
+
+
+
+        // 맨처음 img 띄우기
+        for (let i = 0; i < movieAllDate.length; i++) {
+            movieArr.push(movieAllDate[i]);
+        }
+
+        var randomSet = new Set();
+        while (randomSet.size < movieArr.length) {
+            var randomIndex = Math.floor(Math.random() * movieArr.length);
+            randomSet.add(randomIndex);
+        }
+        randomArr = Array.from(randomSet);
+
+
+        let temp1 = randomArr[0];
+        let temp2 = randomArr[1];
+
+        let round = 16
+
+
+        $('#abc').html(`<img class="imggg" src="${movieArr[temp1].imgUrl}">`);
+        $('#def').html(`<img class="imggg" src="${movieArr[temp2].imgUrl}">`);
+
+
+        $('#pick2').on("click", () => {
+            console.log(num);
+            if (num >= 0 && num <= 8) {
+                winnerArr.push(movieArr[randomArr[1]]);
+                movieArr.splice(randomArr[1], 1);
+
+                var randomSet = new Set();
+
+                while (randomSet.size < movieArr.length) {
+                    var randomIndex = Math.floor(Math.random() * movieArr.length);
+                    randomSet.add(randomIndex);
+                }
+                randomArr = Array.from(randomSet);
+                console.log(movieArr);
+                let temp1 = randomArr[0];
+                let temp2 = randomArr[1];
+                num++;
+
+                if (num == 8) {
+                    console.log("222222222222222222222222222222");
+                    $('#abc').html(`<img class="imggg" src="${winnerArr[0].imgUrl}">`);
+                    $('#def').html(`<img class="imggg" src="${winnerArr[1].imgUrl}">`);
+                    num++;
+                    console.log("스텝원끝");
+                    console.log(winnerArr);
+                    console.log(winnerArr4);
+                    console.log(num);
+                    $('#rkd').text(`${num - 1}` + "강");
+                } else {
+                    $('#abc').html(`<img class="imggg" src="${movieArr[temp1].imgUrl}">`);
+                    $('#def').html(`<img class="imggg" src="${movieArr[temp2].imgUrl}">`);
+                }
+            } else if (num >= 9 && num < 15) {
+                console.log("두번째 들어옴!!!!!!!!!");
+                console.log("돌릴배열",winnerArr);
+                console.log("승자배열",winnerArr4);
+
+
+                var randomSet = new Set();
+
+                while (randomSet.size < winnerArr.length) {
+                    var randomIndex = Math.floor(Math.random() * winnerArr.length);
+                    randomSet.add(randomIndex);
+                }
+                randomArr = Array.from(randomSet);
+
+                let temp1 = randomArr[0];
+                let temp2 = randomArr[1];
+                if (num == 12) {
+                    $('#abc').html(`<img class="imggg" src="${winnerArr4[temp1].imgUrl}">`);
+                    $('#def').html(`<img class="imggg" src="${winnerArr4[temp2].imgUrl}">`);
+                    num++;
+                    console.log("스텝투끝");
+                    console.log(winnerArr);
+                    console.log(winnerArr4);
+                } else {
+                    $('#abc').html(`<img class="imggg" src="${winnerArr[temp1].imgUrl}">`);
+                    $('#def').html(`<img class="imggg" src="${winnerArr[temp2].imgUrl}">`);
+                }
+                console.log("새배열에 들어갈값",winnerArr[temp2])
+                winnerArr4.push(winnerArr[temp2]);
+                winnerArr.splice(temp2, 1);
+                num++;
+
+               
+            }
+        });
+
+
+
+
+
+
+    </script>
+</body>
+
+
+</html>

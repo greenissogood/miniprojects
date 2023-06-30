@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/top_button.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./css/main.css"> -->
+    
+    <style>
+        
+        
+        /* 웹폰트 */
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal; 
+        }
+
+        @font-face {
+            font-family: 'OAGothic-ExtraBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        html, body {
+            height: 100%;
+            text-shadow: 3px 4px 5px gray;
+            
+        }
+        body{
+            /* position: relative; */
+            /* background-image: url(./img/mova_main.jpg); */
+            background-color: #24283b;       
+        }
+        #wrap {
+            min-height: 100%;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+
+        /* 헤더 시작 */
+        .header{
+            display: flex;
+            background-color: rgba(36, 40, 59, 0.7);
+            position: fixed;
+            z-index: 950;
+            width: 100%;
+            
+        }
+        .logo{
+            margin : 0 5% 0 5%; 
+        }
+        .logo img{
+            width: 200px;
+        }
+        .headerBtn1, .headerBtn2, .headerBtn3{
+            font-family: 'Pretendard-Regular';
+            font-size: 30px;
+            text-shadow: 3px 4px 5px gray;
+            color: #ffffff;
+            margin: 20px 30px 15px 30px;
+              
+            text-align: center;
+        }
+
+        /* 메인 비디오 배경 */
+        .jb-box { width: 100%; height:1000px; overflow: hidden;margin: 0px auto; position: relative; padding: auto; }
+        video { width: 100%;}
+        .jb-text { position: absolute; top: 40%; width: 100%; }
+        .jb-text p { margin-top: -24px; text-align: center; font-size: 100px; color: #ffffff; 
+                    text-shadow: 3px 4px 5px gray;
+                    padding : 30px;
+                    font-family: 'OAGothic-ExtraBold';
+                    /* 텍스트 그림자 */
+                    background-color: rgba(36, 40, 59, 0.4);          
+        }
+        
+        /* 시작버튼 */
+        .start{
+            margin-top: 2%;
+            text-align: center;
+        }
+        .startBtn{
+            font-family: 'OAGothic-ExtraBold';
+            border-radius: 10px;
+            font-size: 45px;
+            text-shadow: 3px 4px 5px gray;
+            background-color: rgba(36, 40, 59, 0.8); 
+                /* 백그라운드 투명도 rgba (0, 0, 0, 0.2) */
+            color: #ffffff;
+            padding: 20px;
+            box-shadow: 3px 5px 5px 3px rgb(83, 81, 81);
+        }
+
+        /* 슬라이드 */
+        
+        swiper-slide {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        swiper-slide img {
+            display: block;
+            width: 100%;
+            /* height: 100%; */
+            object-fit: cover;
+            box-shadow: 3px 3px 3px 3px rgb(29, 25, 28);
+            border-radius: 50px;
+            /* margin-left: 13% ;  */
+
+        }
+        swiper-container {
+            width: 1700px;
+            height: 500px;
+            /* margin: 30px auto;  */
+            /* margin-left: 25%;  */
+            
+        }
+        h1{
+            color: white;
+            background-color: rgba(36, 40, 59, 0.6); 
+            padding-left: 10%;
+            margin: 50px 0px 25px 0px;
+        }
+        
+        #swipe2{
+            margin-top: 10%;
+            margin-bottom: 15%;
+        }
+/* 
+        #topBtn {
+            position: absolute;
+            right: 2%;
+            bottom: 2%;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            display: block;
+            background: blue;
+            color: #fff;
+            font-size: 10px;
+            text-align: center;
+            border-radius: 5px;
+        } */
+
+
+
+
+
+
+
+        footer {
+            width: 100%;
+            height: 90px;
+            bottom: 0px;
+            position: relative;
+            border-top: 1px solid #c4c4c4;
+            padding-top: 15px;
+            color: #808080;
+            font-size: 20px;   
+            /* transform: translateY(-100%); */
+        }
+        footer a {
+            display: inline-block;
+            
+            color: #808080; font-size: 25px;
+            margin-left: 30px;
+        }
+
+        footer a:visited {
+            color: #808080;
+        }
+
+        footer p {
+            margin-top: 0; margin-bottom: 0;   
+        }
+
+        footer p span {
+            display: inline-block;
+            margin-left: 30px;
+        }
+
+        
+        .video_modal_popup.reveal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            z-index:998;
+        }
+
+        .video_modal_popup .video-wrapper {
+            position: relative;
+            width: 80%;
+            padding-bottom: 45%;
+            z-index: 999;
+        }
+
+        .video_modal_popup .video-wrapper iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video_modal_popup.reveal .video_modal_popup-closer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            z-index: 998;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <script src="./js/jquery-3.7.0.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/bootstrap.esm.js"></script>
+    <script src="https://kit.fontawesome.com/6abc5d94d6.js" crossorigin="anonymous"></script>
+ 
+
+    <main id="wrap">
+        <!-- 비디오 창띄우기  -->
+        <div class="video_modal_popup">
+            <div class="video_modal_popup-closer"></div>
+        </div> 
+
+
+        <header class="header">
+            <div class="logo"">
+                <a href="./movaMain.html"><img src="./img/logo/mova_logo_grad.png" alt="로드실패"></a>
+            </div>
+            
+            <div class="headerBtn1">영화성향분석</div>
+            <div class="headerBtn2">현재 상영작</div>
+            <div class="headerBtn3">올해 흥행작</div>
+        </header>
+        
+        <div class="jb-box">
+            <video muted autoplay loop >
+            <source src="./video/mova_video.mp4" type="video/mp4" >
+            
+            </video>
+            <div class="jb-text">
+                <p>오늘 MOVA ?</p>
+                <div class="start"><a href="./main.html"><button class="startBtn">찾아 보기</button></a></div>
+            </div>
+        </div>
+
+        <div class="movie1" style="margin-bottom: 120px;"></div>
+        
+        <div id="swipe1">
+            <h1 class="h1_present">현재 상영작</h1>
+            <swiper-container class="mySwiper" slides-per-view="5" centered-slides="true" space-between="30"
+                 navigation="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+                <swiper-slide>
+                    <!-- 비디오 창띄우려고 div씌우기 -->
+                    <div class="popupModalVideo">
+                        <a data-video="BOqFRHCrN-k"><img src="./img/엘리멘탈.jpg" alt=""></a>
+                    </div>
+                </swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="UTPEPu2Je9g"><img src="./img/범죄도시.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="Obc6ecquoA0"><img src="./img/귀공자.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="aa0WjdSYdCk"><img src="./img/스파이더맨.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="aRP2WU0rb8c"><img src="./img/플래시.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="i76UnY_zKeM"><img src="./img/명탐정코난.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="kVdDrJXaNK4"><img src="./img/트랜스포머.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="rZE_KcwmGrc"><img src="./img/악마들.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="7AO8JsA9jlE"><img src="./img/슈가.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="N-9uL4pQdpQ"><img src="./img/수라.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="n9WfeblxQC4"><img src="./img/나비효과.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="XyHr-s3MfCQ"><img src="./img/가오갤.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="8V6YgweMuXo"><img src="./img/인드림.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="TYpw9hs_9B8"><img src="./img/북오브러브.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="lZg-NjhG3WQ"><img src="./img/남은인생10년.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="BNQMx5gy5Xg"><img src="./img/인어공주.jpg" alt=""></a></div></swiper-slide>
+            </swiper-container>
+        </div>
+
+        <p class="movie2"></p>
+
+        <div id="swipe2">
+            <h1>2023년 흥행작</h1>
+            <swiper-container class="mySwiper" slides-per-view="5" centered-slides="true" space-between="30"
+                 navigation="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+                <swiper-slide><div class="popupModalVideo"><a data-video="UTPEPu2Je9g"><img src="./img/범죄도시.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="UUpk0wnNhtU"><img src="./img/스즈메.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="nhjdgKVEa_g"><img src="./img/슬램.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="4jhz2NU-24Q"><img src="./img/마리오.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="jsu9KYYG3og"><img src="./img/존윅4.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="zmNRHgRG3lo"><img src="./img/분노의.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="kJnmT5BS4SA"><img src="./img/교섭.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="33Ljhqgdtsc"><img src="./img/앤트맨.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="XyHr-s3MfCQ"><img src="./img/가오갤.jpg" alt=""></a></div></swiper-slide>
+                <swiper-slide><div class="popupModalVideo"><a data-video="BOqFRHCrN-k"><img src="./img/엘리멘탈.jpg" alt=""></a></div></swiper-slide>
+            </swiper-container>
+        </div>        
+        <div class="banner-bridge-center">
+            <div class="scroll-button-floating">
+                <a class="scroll-button button scroll-next" >
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+        <footer>
+            <nav>
+                <a href='https://' target='_blank'>인공지능사관학교</a> 
+                <a href='https://' target='_blank'>JS_A반 한수도시</a>
+            </nav>
+            <p>
+                <span>저자 : 한수도시</span><br/>
+                <span>이메일 : mova@mova.com</span><br/>
+                <span>Copyright 2020. cocoder. All Rights Reserved.</span>
+            </p>
+        </footer>
+
+    <!-- 슬라이드 swiper js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+    <!-- <script src="./js/main.js"></script> -->
+    <script>
+        const swiperEl = document.querySelector('swiper-container');
+        const swiper = swiperEl.swiper;
+
+        
+        //버튼 클릭 스크롤 이벤트
+        $(document).ready(function(){
+            $('.headerBtn1').click(function(){
+                var offset = $('.jb-box').offset(); //선택한 태그의 위치를 반환
+                    //animate()메서드를 이용해서 선택한 태그의 스크롤 위치를 지정해서 0.4초 동안 부드럽게 해당 위치로 이동함 
+                $('html').animate({scrollTop : offset.top}, 0); //마지막 숫자는 delay 100->0.1초
+            });
+        });
+        $(document).ready(function(){
+            $('.headerBtn2').click(function(){
+                var offset = $('.movie1').offset();
+                $('html').animate({scrollTop : offset.top}, 0);
+            });
+        });
+        $(document).ready(function(){
+            $('.headerBtn3').click(function(){
+                var offset = $('.movie2').offset();
+                $('html').animate({scrollTop : offset.top}, 0);
+            });
+        });
+
+        // 탑버튼
+        $('.banner-bridge-center').on('click', function(){
+            $('html, body').stop().animate({scrollTop: 0}, 0);
+        });
+
+
+        // 비디오 창 띄우기
+        $(".popupModalVideo a").click(function() {
+        $(".video_modal_popup").addClass("reveal"),
+        $(".video_modal_popup .video-wrapper").remove(),
+        $(".video_modal_popup").append("<div class='video-wrapper'><iframe width='560' height='315' src='https://youtube.com/embed/" + $(this).data("video") + "?rel=0&playsinline=1&autoplay=1' allow='autoplay; encrypted-media' allowfullscreen></iframe></div>")
+        }),
+        $(".video_modal_popup-closer").click(function() {
+            $(".video_modal_popup .video-wrapper").remove(),
+            $(".video_modal_popup").removeClass("reveal")
+        });
+
+
+    </script>
+</body>
+</html>

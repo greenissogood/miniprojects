@@ -1,0 +1,212 @@
+
+        
+        /* 웹폰트 */
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal; 
+        }
+
+        @font-face {
+            font-family: 'OAGothic-ExtraBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        html, body {
+            height: 100%;
+            text-shadow: 3px 4px 5px gray;
+            
+        }
+        body{
+            /* position: relative; */
+            /* background-image: url(./img/mova_main.jpg); */
+            background-color: #24283b;       
+        }
+        #wrap {
+            min-height: 100%;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+
+        /* 헤더 시작 */
+        .header{
+            display: flex;
+            background-color: rgba(36, 40, 59, 0.7);
+            position: fixed;
+            z-index: 950;
+            width: 100%;
+            
+        }
+        .logo{
+            margin : 0 5% 0 5%; 
+        }
+        .logo img{
+            width: 200px;
+        }
+        .headerBtn1, .headerBtn2, .headerBtn3{
+            font-family: 'Pretendard-Regular';
+            font-size: 30px;
+            text-shadow: 3px 4px 5px gray;
+            color: #ffffff;
+            margin: 20px 30px 15px 30px;
+              
+            text-align: center;
+        }
+
+        /* 메인 비디오 배경 */
+        .jb-box { width: 100%; height:1000px; overflow: hidden;margin: 0px auto; position: relative; padding: auto; }
+        video { width: 100%;}
+        .jb-text { position: absolute; top: 40%; width: 100%; }
+        .jb-text p { margin-top: -24px; text-align: center; font-size: 100px; color: #ffffff; 
+                    text-shadow: 3px 4px 5px gray;
+                    padding : 30px;
+                    font-family: 'OAGothic-ExtraBold';
+                    /* 텍스트 그림자 */
+                    background-color: rgba(36, 40, 59, 0.4);          
+        }
+        
+        /* 시작버튼 */
+        .start{
+            margin-top: 2%;
+            text-align: center;
+        }
+        .startBtn{
+            font-family: 'OAGothic-ExtraBold';
+            border-radius: 10px;
+            font-size: 45px;
+            text-shadow: 3px 4px 5px gray;
+            background-color: rgba(36, 40, 59, 0.8); 
+                /* 백그라운드 투명도 rgba (0, 0, 0, 0.2) */
+            color: #ffffff;
+            padding: 20px;
+            box-shadow: 3px 5px 5px 3px rgb(83, 81, 81);
+        }
+
+        /* 슬라이드 */
+        
+        swiper-slide {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        swiper-slide img {
+            display: block;
+            width: 100%;
+            /* height: 100%; */
+            object-fit: cover;
+            box-shadow: 3px 3px 3px 3px rgb(29, 25, 28);
+            border-radius: 50px;
+            /* margin-left: 13% ;  */
+
+        }
+        swiper-container {
+            width: 1700px;
+            height: 500px;
+            /* margin: 30px auto;  */
+            /* margin-left: 25%;  */
+            
+        }
+        h1{
+            color: white;
+            background-color: rgba(36, 40, 59, 0.6); 
+            padding-left: 10%;
+            margin: 50px 0px 25px 0px;
+        }
+        
+        #swipe2{
+            margin-top: 10%;
+            margin-bottom: 15%;
+        }
+/* 
+        #topBtn {
+            position: absolute;
+            right: 2%;
+            bottom: 2%;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            display: block;
+            background: blue;
+            color: #fff;
+            font-size: 10px;
+            text-align: center;
+            border-radius: 5px;
+        } */
+
+
+
+
+
+
+
+        footer {
+            width: 100%;
+            height: 90px;
+            bottom: 0px;
+            position: relative;
+            border-top: 1px solid #c4c4c4;
+            padding-top: 15px;
+            color: #808080;
+            font-size: 20px;   
+            /* transform: translateY(-100%); */
+        }
+        footer a {
+            display: inline-block;
+            
+            color: #808080; font-size: 25px;
+            margin-left: 30px;
+        }
+
+        footer a:visited {
+            color: #808080;
+        }
+
+        footer p {
+            margin-top: 0; margin-bottom: 0;   
+        }
+
+        footer p span {
+            display: inline-block;
+            margin-left: 30px;
+        }
+
+        
+        .video_modal_popup.reveal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            z-index:998;
+        }
+
+        .video_modal_popup .video-wrapper {
+            position: relative;
+            width: 80%;
+            padding-bottom: 45%;
+            z-index: 999;
+        }
+
+        .video_modal_popup .video-wrapper iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video_modal_popup.reveal .video_modal_popup-closer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            z-index: 998;
+        }

@@ -1,0 +1,60 @@
+$color:#56cbe7;
+$background:#edf7ff;
+body{
+  padding-top:200px;
+  background:$background;
+}
+.scroll-button {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-color: $color;
+  border-radius: 22.5px;
+  left: 50%;
+  margin-left: -22.5px;
+  z-index: 45;
+  cursor: pointer;
+  text-align: center;
+  font-size: 35px;
+  line-height: 40px;
+  color: #fff;
+  &:hover {
+    color: #fff;
+  }
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    border: $color 12px solid;
+    opacity: 0.3;
+    animation: ripple 3.0s ease-out infinite;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  &:after {
+    animation-delay: -0.6s;
+  }
+  &.scroll-button-floating {
+    position: fixed;
+    bottom: 100px;
+    transition: opacity .5s;
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  50%, 100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

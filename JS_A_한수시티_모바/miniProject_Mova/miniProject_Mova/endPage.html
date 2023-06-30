@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   font: inherit;
+   vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+   display: block;
+}
+body {
+   line-height: 1;
+   font-family: "NanumSquare";
+   
+}
+ol, ul {
+   list-style: none;
+}
+blockquote, q {
+   quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+   content: '';
+   content: none;
+}
+table {
+   border-collapse: collapse;
+   border-spacing: 0;
+}
+
+.dot {overflow:hidden;float:left;width:12px;height:12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');}    
+.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
+.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+.number {font-weight:bold;color:#ee6152;}
+.dotOverlay:after {content:'';position:absolute;margin-left:-6px;left:50%;bottom:-8px;width:11px;height:8px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
+.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+.distanceInfo .label {display:inline-block;width:50px;}
+.distanceInfo:after {content:none;}
+
+.my-info{
+    font-weight: bold;
+}
+#pos-img{
+    background-repeat:no-repeat;
+    background-size: cover;
+    height:442px;
+    width:100%;
+    border:1px solid black;
+}
+.navCSS{
+    background-color: rgba(36, 40, 59, 1);
+    position: fixed;
+    width:100%;
+    top:0;
+
+}
+.logo-img{
+    width:200px;
+    margin-left: 5%;
+}
+.top-font{
+    font-size:40px;
+    font-weight: bold;
+}
+
+    </style>
+    
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8f2a06fe6d85938d20b9941cf9659a53"></script>
+
+</head>
+<body>
+    <!-- nav시작 -->
+    <nav class="navbar navbar-expand-lg navCSS" style="height:100px;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./movaMain.html"><img class="logo-img" src="./img/logo/mova_logo_grad.png"></a>
+        </div>
+      </nav>
+      <!-- nav끝 -->
+
+    <div class="container" style="margin-top:100px">
+        <div class="row">
+            <div class="col-4 mt-5 ms-5 top-font">당신의 선택은!</div>
+            <div class="col-7 text-center mt-5 top-font" id="info-title" style="font-size:30px"></div>
+        </div>
+            <div class="row" >
+            <div class="col-4 mt-5 ms-5"><img id="pos-img"></div>
+            <div class="col-7 mt-5 ms-5">
+                <table class="table">
+                    <!--  table-borderless -->
+                    <tbody class="table-group-divider" id="main-table">
+                   
+                    </tbody>
+                  </table>
+            </div>
+            </div>
+            <!-- 지도 div///////////////////////////////////////////////////////// -->
+            <div class="mt-2" id="map" style="width:100%;height:500px;"></div>
+        
+        </div>
+        <div style="height:100px"></div>
+
+  <script>
+    // 엘리멘탈 자리에 넘겨온값 할당
+    let lastMovieName="범죄도시3"
+    let posterImg= "./img/범죄도시.jpg"
+    $('#pos-img').attr('src', posterImg);
+    var positions = [
+{
+    title: "메가박스 광주상무",
+    latlng: new kakao.maps.LatLng(35.1546, 126.8546),
+    lat1: 35.1546,
+    lng2: 126.8546,
+    "스파이더맨 어크로스더유니버스": ["11:20", "20:10"],
+    "귀공자": ["16:50", "19:15", "21:40"],
+    "범죄도시3": ["13:40", "15:50", "18:00", "20:10", "22:20", "10:30", "12:40"],
+    "엘리멘탈": ["10:10","13:40", "14:40", "16:55", "21:25", "23:40"],
+    "트랜스포머 비스트의서막": ["20:25", "23:20"]
+  },
+  {
+    title: "메가박스 광주하남",
+    latlng: new kakao.maps.LatLng(35.1629265, 126.811531),
+    lat1: 35.1629265,
+    lng2: 126.811531,
+    "스파이더맨 어크로스더유니버스": ["14:05","14:40","21:25"],
+    "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+    "범죄도시3": ["15:50", "18:00", "22:20", "10:30",],
+    "엘리멘탈": ["10:10", "12:25", "14:40", "16:55", "19:10", "21:25", "23:40"],
+    "트랜스포머 비스트의서막": ["20:25", "23:20"]
+  },
+  {
+    title: "CGV 광주첨단",
+    latlng: new kakao.maps.LatLng(35.2164672, 126.850364),
+    lat1: 35.2164672,
+    lng2: 126.850364,
+    "스파이더맨 어크로스더유니버스": ["10:30", "14:05","20:10"],
+    "귀공자": ["16:50", "19:15", "21:40", "10:50","16:55"],
+    "범죄도시3": ["15:50", "20:10", "22:20", "10:30", "12:40"],
+    "엘리멘탈": ["10:10", "12:25", "14:40", "16:55", "19:10", "21:25", "23:40"],
+    "트랜스포머 비스트의서막": ["13:40","20:25", "23:20"],
+    "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["23:20"]
+  },
+  {
+    title: "롯데시네마 광주",
+    latlng: new kakao.maps.LatLng(35.1548221, 126.912080),
+    lat1: 35.1548221,
+    lng2: 126.912080,
+    "스파이더맨 어크로스더유니버스": ["16:55", "20:10"],
+    "귀공자": ["19:15", "10:50"],
+    "범죄도시3": ["13:40", "15:50", "18:00","20:10",, "10:30", "12:40"],
+    "엘리멘탈": ["10:10", "12:25", "14:40", "13:40","16:55", "19:10"],
+    "트랜스포머 비스트의서막": ["20:25", "23:20"],
+    "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["14:40"],
+    "영화슈가 로드투디데이": ["11:05", "17:30"]
+  },
+  {
+    title: "메가박스 전대",
+    latlng: new kakao.maps.LatLng(35.1726061, 126.912467),
+    lat1: 35.1726061,
+    lng2: 126.912467,
+    "스파이더맨 어크로스더유니버스": ["11:20"],
+    "귀공자": ["16:50", "19:15", "21:40", "10:50","20:25"],
+    "범죄도시3": ["15:50", "18:00", "20:10", "22:20", "12:40"],
+    "엘리멘탈": ["12:25", "14:40", "16:55", "19:10", "23:40"],
+    "트랜스포머 비스트의서막": ["20:25", "23:20"],
+    "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["17:15"],
+    "영화슈가 로드투디데이": ["11:05", "17:30"]
+  },
+  {
+    title: "CGV 광주상무",
+    latlng: new kakao.maps.LatLng(35.1542930, 126.851039),
+    lat1: 35.1542930,
+    lng2: 126.851039,
+    "스파이더맨 어크로스더유니버스": ["11:20", "14:05"],
+    "귀공자": ["16:50", "19:15", "21:40", "10:50", "16:55","11:05"],
+    "범죄도시3": ["15:50", "18:00", "20:10", "22:20", "10:30", "12:40"],
+    "엘리멘탈": ["10:10", "12:25", "14:40", "16:55", "19:10", "21:25", "23:40"],
+    "트랜스포머 비스트의서막": ["13:40","20:25", "23:20"],
+    "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["10:50"],
+    "영화슈가 로드투디데이": ["11:05", "13:40","17:30"]
+  },
+  {
+  title: "CGV 광주터미널",
+  latlng: new kakao.maps.LatLng(35.1603362, 126.878697),
+  lat1: 35.1603362,
+  lng2: 126.878697,
+  "스파이더맨 어크로스더유니버스": ["11:20", "14:05"],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["13:40", "15:50", "18:00", "20:10","10:30", "12:40"],
+  "엘리멘탈": ["14:40", "16:55","21:25", "23:40"],
+  "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["18:00"],
+  "남은 인생 10년": ["22:00"]
+},
+{
+  title: "메가박스 첨단",
+  latlng: new kakao.maps.LatLng(35.2212198, 126.852376),
+  lat1: 35.2212198,
+  lng2: 126.852376,
+  "스파이더맨 어크로스더유니버스": ["20:10",],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["15:50", "18:00", "20:10","10:30"],
+  "엘리멘탈": ["10:00","16:55", "19:10", "21:25", "23:40"],
+  "트랜스포머 비스트의서막": ["20:25", "23:20"],
+  "플래시": ["17:00"]
+},
+{
+  title: "롯데시네마 수완",
+  latlng: new kakao.maps.LatLng(35.1902158, 126.820987),
+  lat1: 35.1902158,
+  lng2: 126.820987,
+  "스파이더맨어크로스더유니버스": ["11:20", "14:05"],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["13:40", "15:50", "20:10", "22:20", "10:30", "12:40"],
+  "엘리멘탈": ["14:40", "16:55", , "18:00","19:10", "21:25", "23:40"],
+  "영화슈가 로드투디데이": ["11:05", "17:30"]
+},
+{
+  title: "CGV 광주용봉",
+  latlng: new kakao.maps.LatLng(35.1823769, 126.912731),
+  lat1: 35.1823769,
+  lng2: 126.912731,
+  "스파이더맨 어크로스더유니버스": ["11:20",],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["12:25", "15:50", "18:00", "20:10", "22:20"],
+  "엘리멘탈": [ "12:25", "14:40", "16:55", "19:10"],
+  "플래시": ["17:00"]
+},
+{
+  title: "CGV 광주충장로",
+  latlng: new kakao.maps.LatLng(35.1487748, 126.913107),
+  lat1: 35.1487748,
+  lng2: 126.913107,
+  "스파이더맨 어크로스더유니버스": ["11:20", "14:05"],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["13:40", "18:00", "20:10", "22:20", "10:30", "12:40"],
+  "엘리멘탈": ["10:10", "12:25", "14:40", "16:55", "19:10", "21:25", "23:40"]
+},
+  {
+  title: "롯데시네마 광산",
+  latlng: new kakao.maps.LatLng(35.1599942, 126.809661),
+  lat1: 35.1599942,
+  lng2: 126.809661,
+  "스파이더맨 어크로스더유니버스": ["11:20"],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["18:00", "20:10", "22:20", "10:30", "12:40"],
+  "엘리멘탈": ["10:10", "12:25", "14:40", "16:55", "19:10", "21:25", "23:40"]
+},
+{
+  title: "CGV 광주하남",
+  latlng: new kakao.maps.LatLng(35.1783137, 126.806544),
+  lat1: 35.1783137,
+  lng2: 126.806544,
+  "스파이더맨 어크로스더유니버스": ["10:50", "14:05"],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50"],
+  "범죄도시3": ["13:40", "15:50", "18:00", "20:10", "22:20", "10:30", "12:40"],
+  "엘리멘탈": [ "12:25", "14:40", "16:55", "19:10", "21:25", "23:40"],
+  "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["17:15", "19:40", "22:45"]
+},
+  {
+   title: "CGV 광주금남로",
+   latlng: new kakao.maps.LatLng(35.1469101, 126.914690),
+   lat1: 35.1469101,
+   lng2: 126.914690,
+  "스파이더맨어크로스더유니버스":["10:10", "14:05"],
+  "귀공자": ["16:50", "19:15", "21:40", "10:50","10:50","20:10"],
+  "범죄도시3": ["15:50", "18:00", "20:10", "22:20", "10:30", "12:40"],
+  "엘리멘탈": ["10:10", "12:25", "14:40", "16:55", "19:10", "21:25"],
+  "명탐정코난 하이바라아이이야기~흑철의미스터리트레인": ["17:15", "19:40", "22:45"]
+  
+}
+];
+let movieDate = new Date();
+let todayMonth = movieDate.getMonth() + 1;
+let todayDay = movieDate.getDate();
+document.getElementById('info-title').innerText= todayMonth+"월"+" "+todayDay+"일"+" "+lastMovieName+" "+"상영 정보"
+
+for (let i = 0; i < positions.length; i++) {
+
+  
+  if (positions[i][lastMovieName]) {
+    positions[i][lastMovieName] = positions[i][lastMovieName].join("　　　");
+  } else {
+    positions[i][lastMovieName] = "";
+  }
+  
+  $('#main-table').append('<tr id="trss"><th style="font-size:16px; font-weight:bold;">' + positions[i].title + '</th><td style="font-size:15px;">' + positions[i][lastMovieName] + '</td></tr>');
+}
+
+
+// 지도 시작//
+///////////////////////////////// 내위치 찍기 //////////////////////////////
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 6 // 지도의 확대 레벨 
+    }; 
+
+var map = new kakao.maps.Map(mapContainer, mapOption); ////////////////////////////////// 지도를 생성합니다
+
+/////////////////////////////////////////////////////////// 선그리기 시작/////////////////////////////////////////////////////////
+var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
+var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
+var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+
+
+
+// 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 선 그리기가 시작됩니다 그려진 선이 있으면 지우고 다시 그립니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+
+    // 마우스로 클릭한 위치입니다 
+    var clickPosition = mouseEvent.latLng;
+
+    // 지도 클릭이벤트가 발생했는데 선을 그리고있는 상태가 아니면
+    if (!drawingFlag) {
+
+        // 상태를 true로, 선이 그리고있는 상태로 변경합니다
+        drawingFlag = true;
+        
+        // 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
+        deleteClickLine();
+        
+        // 지도 위에 커스텀오버레이가 표시되고 있다면 지도에서 제거합니다
+        deleteDistnce();
+
+        // 지도 위에 선을 그리기 위해 클릭한 지점과 해당 지점의 거리정보가 표시되고 있다면 지도에서 제거합니다
+        deleteCircleDot();
+    
+        // 클릭한 위치를 기준으로 선을 생성하고 지도위에 표시합니다
+        clickLine = new kakao.maps.Polyline({
+            map: map, // 선을 표시할 지도입니다 
+            path: [clickPosition], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+            strokeWeight: 3, // 선의 두께입니다 
+            strokeColor: '#db4040', // 선의 색깔입니다
+            strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid' // 선의 스타일입니다
+        });
+        
+        // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
+        moveLine = new kakao.maps.Polyline({
+            strokeWeight: 3, // 선의 두께입니다 
+            strokeColor: '#db4040', // 선의 색깔입니다
+            strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid' // 선의 스타일입니다    
+        });
+    
+        // 클릭한 지점에 대한 정보를 지도에 표시합니다
+        displayCircleDot(clickPosition, 0);
+
+            
+    } else { // 선이 그려지고 있는 상태이면
+
+        // 그려지고 있는 선의 좌표 배열을 얻어옵니다
+        var path = clickLine.getPath();
+
+        // 좌표 배열에 클릭한 위치를 추가합니다
+        path.push(clickPosition);
+        
+        // 다시 선에 좌표 배열을 설정하여 클릭 위치까지 선을 그리도록 설정합니다
+        clickLine.setPath(path);
+
+        var distance = Math.round(clickLine.getLength());
+        displayCircleDot(clickPosition, distance);
+    }
+});
+    
+// 지도에 마우스무브 이벤트를 등록합니다
+// 선을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 선의 위치를 동적으로 보여주도록 합니다
+kakao.maps.event.addListener(map, 'mousemove', function (mouseEvent) {
+
+    // 지도 마우스무브 이벤트가 발생했는데 선을 그리고있는 상태이면
+    if (drawingFlag){
+        
+        // 마우스 커서의 현재 위치를 얻어옵니다 
+        var mousePosition = mouseEvent.latLng; 
+
+        // 마우스 클릭으로 그려진 선의 좌표 배열을 얻어옵니다
+        var path = clickLine.getPath();
+        
+        // 마우스 클릭으로 그려진 마지막 좌표와 마우스 커서 위치의 좌표로 선을 표시합니다
+        var movepath = [path[path.length-1], mousePosition];
+        moveLine.setPath(movepath);    
+        moveLine.setMap(map);
+        
+        var distance = Math.round(clickLine.getLength() + moveLine.getLength()), // 선의 총 거리를 계산합니다
+            content = '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + distance + '</span>m</div>'; // 커스텀오버레이에 추가될 내용입니다
+        
+        // 거리정보를 지도에 표시합니다
+        showDistance(content, mousePosition);   
+    }             
+});                 
+
+// 지도에 마우스 오른쪽 클릭 이벤트를 등록합니다
+// 선을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면 선 그리기를 종료합니다
+kakao.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
+
+    // 지도 오른쪽 클릭 이벤트가 발생했는데 선을 그리고있는 상태이면
+    if (drawingFlag) {
+        
+        // 마우스무브로 그려진 선은 지도에서 제거합니다
+        moveLine.setMap(null);
+        moveLine = null;  
+        
+        // 마우스 클릭으로 그린 선의 좌표 배열을 얻어옵니다
+        var path = clickLine.getPath();
+    
+        // 선을 구성하는 좌표의 개수가 2개 이상이면
+        if (path.length > 1) {
+
+            // 마지막 클릭 지점에 대한 거리 정보 커스텀 오버레이를 지웁니다
+            if (dots[dots.length-1].distance) {
+                dots[dots.length-1].distance.setMap(null);
+                dots[dots.length-1].distance = null;    
+            }
+
+            var distance = Math.round(clickLine.getLength()), // 선의 총 거리를 계산합니다
+                content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
+                
+            // 그려진 선의 거리정보를 지도에 표시합니다
+            showDistance(content, path[path.length-1]);  
+             
+        } else {
+
+            // 선을 구성하는 좌표의 개수가 1개 이하이면 
+            // 지도에 표시되고 있는 선과 정보들을 지도에서 제거합니다.
+            deleteClickLine();
+            deleteCircleDot(); 
+            deleteDistnce();
+
+        }
+        
+        // 상태를 false로, 그리지 않고 있는 상태로 변경합니다
+        drawingFlag = false;          
+    }  
+});    
+
+// 클릭으로 그려진 선을 지도에서 제거하는 함수입니다
+function deleteClickLine() {
+    if (clickLine) {
+        clickLine.setMap(null);    
+        clickLine = null;        
+    }
+}
+
+// 마우스 드래그로 그려지고 있는 선의 총거리 정보를 표시하거
+// 마우스 오른쪽 클릭으로 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 생성하고 지도에 표시하는 함수입니다
+function showDistance(content, position) {
+    
+    if (distanceOverlay) { // 커스텀오버레이가 생성된 상태이면
+        
+        // 커스텀 오버레이의 위치와 표시할 내용을 설정합니다
+        distanceOverlay.setPosition(position);
+        distanceOverlay.setContent(content);
+        
+    } else { // 커스텀 오버레이가 생성되지 않은 상태이면
+        
+        // 커스텀 오버레이를 생성하고 지도에 표시합니다
+        distanceOverlay = new kakao.maps.CustomOverlay({
+            map: map, // 커스텀오버레이를 표시할 지도입니다
+            content: content,  // 커스텀오버레이에 표시할 내용입니다
+            position: position, // 커스텀오버레이를 표시할 위치입니다.
+            xAnchor: 0,
+            yAnchor: 0,
+            zIndex: 3  
+        });      
+    }
+}
+
+// 그려지고 있는 선의 총거리 정보와 
+// 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 삭제하는 함수입니다
+function deleteDistnce () {
+    if (distanceOverlay) {
+        distanceOverlay.setMap(null);
+        distanceOverlay = null;
+    }
+}
+
+// 선이 그려지고 있는 상태일 때 지도를 클릭하면 호출하여 
+// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 표출하는 함수입니다
+function displayCircleDot(position, distance) {
+
+    // 클릭 지점을 표시할 빨간 동그라미 커스텀오버레이를 생성합니다
+    var circleOverlay = new kakao.maps.CustomOverlay({
+        content: '<span class="dot"></span>',
+        position: position,
+        zIndex: 1
+    });
+
+    // 지도에 표시합니다
+    circleOverlay.setMap(map);
+
+    if (distance > 0) {
+        // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+        var distanceOverlay = new kakao.maps.CustomOverlay({
+            content: '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>m</div>',
+            position: position,
+            yAnchor: 1,
+            zIndex: 2
+        });
+
+        // 지도에 표시합니다
+        distanceOverlay.setMap(map);
+    }
+
+    // 배열에 추가합니다
+    dots.push({circle:circleOverlay, distance: distanceOverlay});
+}
+
+// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 모두 제거하는 함수입니다
+function deleteCircleDot() {
+    var i;
+
+    for ( i = 0; i < dots.length; i++ ){
+        if (dots[i].circle) { 
+            dots[i].circle.setMap(null);
+        }
+
+        if (dots[i].distance) {
+            dots[i].distance.setMap(null);
+        }
+    }
+
+    dots = [];
+}
+
+// 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
+// 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
+// HTML Content를 만들어 리턴하는 함수입니다
+function getTimeHTML(distance) {
+
+    // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+    var walkkTime = distance / 67 | 0;
+    var walkHour = '', walkMin = '';
+
+    // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+    if (walkkTime > 60) {
+        walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+    }
+    walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+    // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+    var bycicleTime = distance / 227 | 0;
+    var bycicleHour = '', bycicleMin = '';
+
+    // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+    if (bycicleTime > 60) {
+        bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+    }
+    bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+    // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+    var content = '<ul class="dotOverlay distanceInfo">';
+    content += '    <li>';
+    content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+    content += '    </li>';
+    content += '    <li>';
+    content += '        <span class="label">도보</span>' + walkHour + walkMin;
+    content += '    </li>';
+    content += '    <li>';
+    content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+    content += '    </li>';
+    content += '</ul>'
+
+    return content;
+}
+
+///////////////////////////////// 선 그리기 종료////////////////////////////////////////////////////////. ///////////////////////////
+
+
+////////////////////////////////// 지도 확대 축소 ///////////////////////////
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+////////////////////////////////// 지도 확대 축소 ///////////////////////////
+
+
+if (navigator.geolocation) {
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var lat = position.coords.latitude; // 위도
+        var lon = position.coords.longitude; // 경도
+        var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+
+        // 위치 정보와 positions 배열을 함께 넘겨서 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition, positions);
+        let divTags = document.querySelectorAll(".my-info");
+
+        for(let i=0; i<divTags.length; i++){
+                document.querySelectorAll(".my-info")[i].parentElement.parentElement.style.width = "130 px"
+                document.querySelectorAll(".my-info")[i].addEventListener("mouseover", (e) => {
+                    e.target.parentElement.parentElement.style.zIndex = 100;
+            });
+            document.querySelectorAll(".my-info")[i].addEventListener("mouseout", (e) => {
+                    e.target.parentElement.parentElement.style.zIndex = 10;
+            });
+            }    
+    });
+} else { // HTML5의 GeoLocation을 사용할 수 없을 때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+    var message = 'geolocation을 사용할 수 없어요..';
+    
+    // 위치 정보와 positions 배열을 함께 넘겨서 마커와 인포윈도우를 표시합니다
+    displayMarker(locPosition, positions);
+}
+
+
+function displayMarker(locPosition, positions) {
+    // 내 위치에 마커를 표시합니다
+    var marker1 = new kakao.maps.Marker({  
+        map: map, 
+        position: locPosition
+    });
+
+    // positions 배열을 순회하면서 각 위치에 대한 마커와 인포윈도우를 표시합니다
+    for (let i = 0; i < positions.length; i++) {
+        var marker = new kakao.maps.Marker({  
+            map: map, 
+            position: new kakao.maps.LatLng(positions[i].lat1, positions[i].lng2),
+            image: markerImage
+        });
+
+        var iwContent = `<div class="my-info" style="padding:5px;">${positions[i].title}</div>`;
+        var infowindow = new kakao.maps.InfoWindow({
+            content: iwContent
+        });
+
+        infowindow.open(map, marker);
+    }
+    
+    // 지도 중심 좌표를 내 위치로 변경합니다
+    map.setCenter(locPosition);
+}
+///////////////////////////////// 내위치 찍기 종료 //////////////////////////////
+// 마커를 표시할 위치와 title 객체 배열입니다 
+
+console.log(positions.length)
+// 마커 이미지의 이미지 주소입니다
+var imageSrc1 = "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-film-marker-64.png"; 
+
+
+for (var i = 0; i < positions.length; i ++) {
+// 마커 이미지의 이미지 크기 입니다
+var imageSize = new kakao.maps.Size(24, 35); 
+
+// 마커 이미지를 생성합니다    
+var markerImage = new kakao.maps.MarkerImage(imageSrc1, imageSize); 
+
+
+// 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+    map: map, // 마커를 표시할 지도
+    position: positions[i].latlng, // 마커를 표시할 위치
+    title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+    image : markerImage // 마커 이미지 
+});
+}
+
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
